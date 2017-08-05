@@ -1,0 +1,171 @@
+<html>
+<head>
+
+<title>Eclipse 2017 calculate distance </title>	
+</head>
+
+<body>
+
+
+<style>
+
+body{
+	background-color: black;
+	font-family: Helvetica;
+}
+
+h1, h3 {
+	text-align: center;
+	color:rgb(232, 165, 0);
+}
+
+.eclipseyear {
+font-size: 60px;
+}
+
+.contentArea{
+	text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+#date{
+	color:white;
+}
+#counterclock{
+	color:rgb(232, 165, 0);
+}
+
+span{
+	color:white;
+}
+
+#zipcodeBlock{
+	display: block;
+	margin:10px;
+}
+
+.zipcodeInput{
+	font-size:25px;
+	margin: 15px;
+	padding:15px;
+	opacity:0.6;
+	text-align: center;
+	font-weight: bold;
+
+}
+
+.result{
+	color:rgb(232, 165, 0);
+	font-size: 30px;
+}
+
+.outputBlock{
+	margin:10px;
+}
+
+.bottomBlock{
+	display: inline-block;
+	margin:10px;
+	width: 30%;
+}
+
+.resultLabel{
+	font-size:16px;
+	color:white;
+	white-space: nowrap;
+}
+
+
+</style>
+
+<div id="date">8/21/17</div>
+<div id="counterclock">CLOCK GOES HERE</div>
+
+<div class="contentArea">
+	<p>Discover the best time to view the</p>
+<h1 class="eclipseyear">2017</h1>
+<h1>Great American Eclipse</h1>
+
+<div id="zipcodeBlock">
+	<span>based on your area</span> <br>
+<input class="zipcodeInput" type="text" class='' pattern="[0-9]*" name="zip" id="zip" autofocus>
+</div>
+
+<div class="outputBlock">
+	<div class="bottomBlock" id="localTime">
+	<div class="resultLabel">Based on your area</div>
+	<div class="result localtimeNum"> TIME </div> 
+</div>
+
+<div class="bottomBlock" id="totalEclipseLocal">
+	<div class="resultLabel">Closest location to view the total eclipse</div>
+	<div class="result cityName"> CITY</div> 
+</div>
+
+<div  class="bottomBlock" id="travelTime">
+	<div class="resultLabel">Estimate driving time</div>
+	<div class="result travelTime">TRAVEL</div> 
+</div>
+
+</div>
+</div>
+
+<!-- API CALLS -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+
+// Getting Zip code from zippopotam.us
+$(function() {		
+	// OnKeyDown Function
+	$("#zip").keydown(function() {
+		var zip_in = $(this);
+		var zip_box = $('#zipcodeBlock');
+		
+		if (zip_in.val().length<5)
+		{
+			zip_box.removeClass('error success');
+		}
+		else if ( zip_in.val().length>5)
+		{
+			zip_box.addClass('error').removeClass('success');
+		}
+		else if ((zip_in.val().length == 5) ) 
+		{
+			// Make HTTP Request
+			$.ajax({
+				url: "http://api.zippopotam.us/us/" + zip_in.val(),
+				cache: false,
+				dataType: "json",
+				type: "GET",
+			  success: function(result, success) {
+					// US Zip Code Records Officially Map to only 1 Primary Location
+					places = result['places'][0];
+					cityName = places['place name'];
+					stateName = places['state'];
+					
+					console.log(cityName);
+					console.log (stateName);
+					zip_box.addClass('success').removeClass('error');
+				},
+				error: function(result, success) {
+					zip_box.removeClass('success').addClass('error');
+				}
+			});
+
+			
+		}
+});
+
+});
+	
+</script>
+
+
+
+</body>
+</html>

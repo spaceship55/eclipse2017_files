@@ -1,0 +1,90 @@
+<html>
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+// $(function() {
+
+
+//     getLocation(function(data) {
+//       // var city = data.city;
+//       var city = "Boston";
+//       getWeather(city).then(function(data) {
+//         // ...
+//       });
+//     });
+//   });
+
+//   // function getLocation(callback) {
+//   //   $.getJSON('http://ipinfo.io', function(cityData) {
+//   //       var cityName = cityData.city;
+//   //       console.log(cityName);
+//   //     callback(cityName);
+//   //   });
+//   // }
+
+    function getLocation(callbackTotalEclipseCity) {
+    $.getJSON('totalEclipse_lat_long.json', function(cityState) {
+        totalEclipseCityState = cityState.locations[1090].CITY + ", " + cityState.locations[1090].STATE;
+        console.log(totalEclipseCityState);
+      callbackTotalEclipseCity(totalEclipseCityState);
+    });
+  }
+
+
+
+
+
+//   function eclipseTime(showTime) {
+//      $.getJSON('http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc=' + 'Boston, MA' + '&format=json');
+//      localEclipseTime = showTime.local_data[0].time,
+//     console.log(localEclipseTime + "2");
+//     showTime()
+//   }
+
+
+  $(document).ready(function() {
+
+    getLocation(function(data) {
+      // var place = data.city;
+      getWeather(city).then(function(data) {
+        // console.log(place + "place")
+        // ...
+      });
+    });
+
+
+    //     getWeather(function(data) {
+    //   var place = data.city;
+    //   getWeather(city).then(function(data) {
+    //     // ...
+    //   });
+    // });
+
+
+  });
+
+  function getLocation(callback) {
+    $.getJSON('http://ipinfo.io', function(data) {
+        var place = data.city;
+        console.log(place + " : place");
+      callback(data.city);
+    });
+  }
+
+  // function getWeather(place) {
+  //   return $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + place + '&units=imperial&APPID=90d625c068e3f3d7818b9e4237871e21');
+  //   console.log(place)
+  // }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+$(function() {
+console.log('jquery is on')
+
+//LOCAL FILE LOADING WORKS!!! //
+$.ajax({
+    type: 'GET',
+    url: 'totalEclipse_lat_long.json',
+    dataType: 'json',
+    success: function(data) { 
+    		totalEclipseCity = data.locations[1090].CITY,
+			totalEclipseState = data.locations[1090].STATE;
+			totalEclipselat = data.locations[1090].latitude;
+			totalEclipselon = data.locations[1090].longitude;
+    		console.log(totalEclipseCity);
+    		console.log(totalEclipseState);
+    		console.log(totalEclipselat);
+    		console.log(totalEclipselon);
+    	}
+    // 	,
+    // data: {}
+    // ,
+    // async: false
+});
+
+
+
+	});
+
+
+</script>
+
+</body>
+</html>

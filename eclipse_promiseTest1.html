@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+var BaseUsnoUrl = 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc=',
+totalEclipseCityState,
+formatJson = '&format=json';
+
+function first(){
+	return $.ajax({ 
+  dataType: "json",
+  url: "totalEclipse_lat_long.json",
+  async: true,
+  success: function(data1) {
+  	totalEclipseCityState = data1.locations[1000].CITY + ", " + data1.locations[1000].STATE;
+        console.log(totalEclipseCityState);
+  }                     
+});
+}
+
+function second(){
+	return $.ajax({ 
+  dataType: "json",
+  // url: BaseUsnoUrl + totalEclipseCityState + formatJson,
+  url: BaseUsnoUrl + 'Boston, MA' + formatJson,
+  async: true,
+  success: function(data2) {
+  	localEclipseTime = data2.local_data[0].time;
+  	console.log(localEclipseTime);
+
+  }  
+});
+
+}
+
+first();
+second();
+
+
+
+// $.when( ajax1 , ajax2  ).done(function( a1, a2 ) {
+//    // a1 and a2 are arguments resolved for the page1 and page2 ajax requests, respectively.
+//    // Each argument is an array with the following structure: [ data, statusText, jqXHR ]
+//    var dataResult = a1[ 0 ] + a2[ 0 ]; // a1[ 0 ] = "Whip", a2[ 0 ] = " It"
+//    if ( /Whip It/.test( data ) ) {
+//       console.log( "We got what we came for!" );
+//    }
+// });
+
+
+
+  });
+
+
+
+
+</script>
+
+</body>
+</html>

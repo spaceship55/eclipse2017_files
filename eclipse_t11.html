@@ -1,0 +1,89 @@
+<!-- Code for zip code -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>
+		$(function() {		
+			// OnKeyDown Function
+			$("#zip").keydown(function() {
+				var zip_in = $(this);
+				var zip_box = $('#zipbox');
+				
+				if (zip_in.val().length<5)
+				{
+					zip_box.removeClass('error success');
+				}
+				else if ( zip_in.val().length>5)
+				{
+					zip_box.addClass('error').removeClass('success');
+				}
+				else if ((zip_in.val().length == 5) ) 
+				{
+					// Make HTTP Request
+					$.ajax({
+						url: "http://api.zippopotam.us/us/" + zip_in.val(),
+						cache: false,
+						dataType: "json",
+						type: "GET",
+					  success: function(result, success) {
+							// US Zip Code Records Officially Map to only 1 Primary Location
+							places = result['places'][0];
+							cityName = places['place name'];
+							stateName = places['state'];
+							$("#city").val(places['place name']);
+							$("#state").val(places['state']);
+							console.log(cityName + " : " + stateName);
+							zip_box.addClass('success').removeClass('error');
+						},
+						error: function(result, success) {
+							zip_box.removeClass('success').addClass('error');
+						}
+					});
+				}
+	});
+
+		});
+			
+	</script>
+
+
+</head>
+<body>
+
+	<div class="container">
+	<div class="span8">
+	<div class='hero-unit'>
+		<!-- <h2>Zippoptamus</h2> -->
+		<form action="#" method="post" class="form fancy-form">
+				<legend>US Address Autocompletion</legend>
+				<br/>
+				<div>
+					<div id="zipbox" class="control-group">
+						<label for="zip">Zip</label>
+						<input type="text" class='' pattern="[0-9]*" name="zip" id="zip" placeholder="Type your ZIP code" autofocus/>
+					</div>	
+				</div>
+				<div>
+					<div id="citybox" class="control-group" >
+						<label for="city">City</label>
+						<input type="text" name="city" id="city" placeholder="" />
+					</div>
+					<div id="statebox" class="control-group">
+						<label for="state">State</label>
+						<input type="text" name="state" id="state" placeholder="" />
+					</div>
+				</div>
+
+			<!-- 	<div>
+					<a href="http://api.zippopotam.us/static/sample_us.html" class='btn btn-success btn-large'>Submit</a>
+				</div> -->
+		</form>	
+	</div>
+	</div>
+	</div>
+</body>
+
+</html>

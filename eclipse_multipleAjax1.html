@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+$(function() {
+console.log('jquery is on')
+
+    var BaseUsnoUrl = 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc=',
+        totalEclipseCityState,
+        formatJson = '&format=json';
+        // console.log(BaseUsnoUrl);
+        // console.log(formatJson);
+
+//LOCAL FILE LOADING WORKS!!! //
+var localCityState = $.ajax({
+    type: 'GET',
+    url: 'totalEclipse_lat_long.json',
+    dataType: 'json',
+    asynch:true,
+    success: function(data1) { 
+    		// totalEclipseCity = data1.locations[1090].CITY;
+			// totalEclipseState = data1.locations[1090].STATE;
+            totalEclipseCityState = data1.locations[1090].CITY + ", " + data1.locations[1090].STATE;
+			// totalEclipselat = data1.locations[1090].latitude;
+			// totalEclipselon = data1.locations[1090].longitude;
+            console.log(totalEclipseCityState);
+    		// console.log(totalEclipseCity);
+    		// console.log(totalEclipseState);
+    		// console.log(totalEclipselat);
+    		// console.log(totalEclipselon);
+    	}
+});
+
+//LOCAL ECLIPSE TIME //
+var localEclipseTimeAjax = $.ajax({
+// console.log( "1" + localEclipseTime);
+
+
+    type: 'GET',
+    url: BaseUsnoUrl + totalEclipseCityState + formatJson,
+    dataType: 'json',
+    asynch:true,
+    success: function(data2) { 
+            localEclipseTime = data2.local_data[0].time,
+            // totalEclipseState = data.locations[1090].STATE;
+            // totalEclipselat = data.locations[1090].latitude;
+            // totalEclipselon = data.locations[1090].longitude;
+            console.log(localEclipseTime);
+            // console.log(totalEclipseState);
+            // console.log(totalEclipselat);
+            // console.log(totalEclipselon);
+        }
+});
+
+
+
+
+	});
+
+
+</script>
+
+</body>
+</html>
