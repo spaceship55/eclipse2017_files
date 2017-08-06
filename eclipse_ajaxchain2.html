@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title></title>
+</head>
+<body>
+
+<script>
+
+// https://medium.com/coding-design/writing-better-ajax-8ee4a7fb95f
+// case1
+// 	$.ajax({
+//     dataType: 'json',
+//     url: 'totalEclipse_lat_long.json'
+// }).done(function(cityState) {
+// 	totalEclipseCityState = cityState.locations[1090].CITY + ", " + 	cityState.locations[1090].STATE;
+//         console.log(totalEclipseCityState);
+// }).fail(function(jqXHR, textStatus, errorThrown) {
+//     // If fail
+//     console.log(textStatus + ': ' + errorThrown);
+// });
+
+
+// case2
+
+// var ajaxCall1 = $.ajax({
+//     dataType: 'json',
+//     url: 'totalEclipse_lat_long.json'
+// });
+
+// ajaxCall1.done(function(cityState) {
+// 	totalEclipseCityState = cityState.locations[1090].CITY + ", " + 	cityState.locations[1090].STATE;
+//     console.log("case2: " + totalEclipseCityState);
+// });
+
+
+// case3
+var a1 = $.ajax({
+	dataType: 'json',
+    url: 'totalEclipse_lat_long.json'
+	}).done(function(cityState) {
+		totalEclipseCityState = cityState.locations[1090].CITY + ", " + cityState.locations[1090].STATE;
+	        // console.log(totalEclipseCityState);
+	}),
+
+    a2 = $.ajax({
+	dataType: 'json',
+    url: 'totalEclipse_lat_long.json'
+    }).done(function(cityState2) {
+		totalEclipseCityState2 = cityState2.locations[1000].CITY + ", " + cityState2.locations[1000].STATE;
+	        // console.log(totalEclipseCityState2);
+	});
+
+$.when(a1, a2).done(function(r1, r2) {
+ // var totalEclipseCityState = r1[0].locations[1000].CITY + ", " r1[0].locations[1000].STATE;
+ // var totalEclipseCityState2 = r2[0].locations[1001].CITY + ", " r2[0].locations[1001].STATE;
+
+console.log("from when and done : "+ totalEclipseCityState);
+console.log("from when and done : "+ totalEclipseCityState2);
+
+	// var city1 = r1[0].locations[990].CITY + ", " + r1[0].locations[990].STATE;
+ //    console.log("city1 is : "+city1);
+    // console.log(r2[0]);
+});
+
+
+// case 4: dependency in previous ajax call 
+
+var a1 = $.ajax({
+             url: '/path/to/file',
+             dataType: 'json'
+         }),
+    a2 = a1.then(function(data) {
+             // .then() returns a new promise
+             return $.ajax({
+                 url: '/path/to/another/file',
+                 dataType: 'json',
+                 data: data.sessionID
+             });
+         });
+
+a2.done(function(data) {
+    console.log(data);
+});
+
+
+
+
+
+</script>
+</body>
+</html>

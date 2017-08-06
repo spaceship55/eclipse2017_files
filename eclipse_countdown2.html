@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>countdown 2</title>
+</head>
+<body>
+
+<div class="countdown">
+<!-- <span>DEAL TIME LEFT : </span> -->
+<p id="demo"></p>
+
+</div>
+<script>
+//https://stackoverflow.com/questions/42200915/count-down-timer-with-a-dynamic-date
+
+var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+var day = currentDate.getDate();
+var month = currentDate.getMonth() ;
+var year = currentDate.getFullYear();
+
+// Set the date we're counting down to
+
+// var countDownDate = new Date(year, month, day).getTime();
+var countDownDate = new Date(2017, 8, 21).getTime();
+// console.log(countDownDate);
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+    // Get todays date and time
+    var now = new Date().getTime();
+    // console.log(now);
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+    // Time calculations for days, hours, minutes and seconds
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("demo").innerHTML = hours + " : "
+    + minutes + " : " + seconds;
+    // console.log(hours + " : "  + minutes + " : " + seconds);
+
+    // If the count down is over, write some text 
+
+}, 1000);
+</script>
+
+</body>
+</html>

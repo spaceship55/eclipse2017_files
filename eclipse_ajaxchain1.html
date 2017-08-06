@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>eclipse chain test 1</title>
+</head>
+<body>
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+// 	function first() {
+// 		console.log('number1');
+//     return $.when('First');
+// }
+// function second(data) {
+// 	console.log(data + 'number2');
+//     message(data);
+//     return $.when(data + ' Second');
+// }
+// function third(data1) {
+// 	console.log(data + 'number3');
+//     message(data);
+//     return $.when(data + ' Third');
+// }
+// function message(html) {
+//     $('<div/>').html(html).appendTo($('body'));
+// }
+
+// (function() {
+//     first().then(second).then(third).then(message);
+// }());
+
+
+
+
+// var d1 = $.Deferred();
+// var d2 = $.Deferred();
+ 
+// $.when( d1, d2 ).done(function ( v1, v2 ) {
+//     console.log( v1 ); // "Fish"
+//     console.log( v2 ); // "Pizza"
+// });
+ 
+// d1.resolve( "Fish" );
+// d2.resolve( "Pizza" );
+
+
+// 	function getLocation(callbackTotalEclipseCity) {
+//     $.getJSON('totalEclipse_lat_long.json', function(cityState) {
+//         totalEclipseCityState = cityState.locations[1090].CITY + ", " + 	cityState.locations[1090].STATE;
+//         console.log(totalEclipseCityState);
+//     });
+//   }
+
+//   getLocation();
+
+
+
+//   $.when($.Deferred().resolve(20), $.Deferred().resolve(4))
+// .then(function(a,b) { 
+//     console.log(a,b) 
+// }).then(function(a,b) { 
+//     console.log(a,b) 
+// });
+
+
+// var d1 = $.Deferred();
+// var d2 = $.Deferred();
+// var d3 = $.Deferred();
+ 
+// $.when( d1, d2, d3 ).done(function ( v1, v2, v3 ) {
+//     console.log( v1 ); // v1 is undefined
+//     console.log( v2 ); // v2 is "abc"
+//     console.log( v3 ); // v3 is an array [ 1, 2, 3, 4, 5 ]
+// });
+ 
+// d1.resolve(getLocation);
+// d2.resolve( "abc" );
+// d3.resolve( 1, 2, 3, 4, 5 );
+
+
+
+// $.when($.Deferred().resolve(2), $.Deferred().resolve(4))
+// .then(function(a,b) { 
+//     console.log(a,b);
+//     return $.Deferred().resolve(a,b);
+// }).then(function(a,b) { 
+//     console.log(a+ 2,b+2);
+// });
+ 
+// prints "2 4" and then "undefined undefined"
+ 
+// $.when($.Deferred().resolve(2), $.Deferred().resolve(4))
+// .then(function(a,b) { 
+//     console.log(a,b) 
+// }).then(function(a,b) { 
+//     console.log(a+a,b+b) 
+// });
+ 
+// prints "2 4" and then "2 4", as expected
+
+
+	function getLocation() {
+    $.getJSON('totalEclipse_lat_long.json', function(cityState) {
+        totalEclipseCityState = cityState.locations[1090].CITY + ", " + 	cityState.locations[1090].STATE;
+        console.log(totalEclipseCityState);
+        return totalEclipseCityState;
+    });
+  }
+
+  // getLocation();
+
+
+function a() {
+    console.log("running a");
+    var promise = $.Deferred(getLocation);
+    // setTimeout(function() {
+    //     console.log("finishing a");
+        promise.resolve()
+        console.log(totalEclipseCityState);
+    // }, 1000);
+    return promise;
+
+}
+
+function b() {
+    console.log("running b");
+    var promise = $.Deferred();
+    // setTimeout(function () {
+    //     console.log("finishing b");
+        promise.resolve();
+    // }, 500);
+    return promise;
+}
+
+function c() {
+    console.log("running c");
+    var promise = $.Deferred();
+    // setTimeout(function () {
+    //     console.log("finishing c");
+        promise.resolve();
+    // }, 1500);
+    return promise;
+}
+
+a().then(b).then(c);
+
+// a().then(function(){
+//     b().then(c)
+// });
+
+</script>
+
+</body>
+</html>

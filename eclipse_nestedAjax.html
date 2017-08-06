@@ -69,13 +69,13 @@
 
   });
 
-  function getLocation(callback) {
-    $.getJSON('http://ipinfo.io', function(data) {
-        var place = data.city;
-        console.log(place + " : place");
-      callback(data.city);
-    });
-  }
+  // function getLocation(callback) {
+  //   $.getJSON('http://ipinfo.io', function(data) {
+  //       var place = data.city;
+  //       console.log(place + " : place");
+  //     callback(data.city);
+  //   });
+  // }
 
   // function getWeather(place) {
   //   return $.getJSON('http://api.openweathermap.org/data/2.5/weather?q=' + place + '&units=imperial&APPID=90d625c068e3f3d7818b9e4237871e21');

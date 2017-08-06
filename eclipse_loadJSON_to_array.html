@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$.ajax({
+url:"totalEclipse_lat_long.json",
+type:"POST",
+dataType : "json",
+success:function(msg){
+    console.log(msg);
+	console.log(msg.locations[0].latitude);
+    }
+});
+
+
+
+</script>
+
+</body>
+</html>

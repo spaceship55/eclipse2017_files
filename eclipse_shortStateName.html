@@ -1,0 +1,204 @@
+<html>
+<head>
+
+<title>Eclipse 2017 calculate distance </title>	
+</head>
+
+<body>
+
+
+<style>
+
+body{
+	background-color: black;
+	font-family: Helvetica;
+}
+
+h1, h3 {
+	text-align: center;
+	color:rgb(232, 165, 0);
+}
+
+.eclipseyear {
+font-size: 60px;
+}
+
+.contentArea{
+	text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+#date{
+	color:white;
+}
+#counterclock{
+	color:rgb(232, 165, 0);
+}
+
+span{
+	color:white;
+}
+
+#zipcodeBlock{
+	display: block;
+	margin:10px;
+}
+
+.zipcodeInput{
+	font-size:25px;
+	margin: 15px;
+	padding:15px;
+	opacity:0.6;
+	text-align: center;
+	font-weight: bold;
+
+}
+
+.errorMessage{
+	font-size: 20px;
+	color: red;
+}
+
+.noDisplay {
+	display: none;
+}
+
+.result{
+	color:rgb(232, 165, 0);
+	font-size: 30px;
+}
+
+.outputBlock{
+	margin:10px;
+}
+
+/*show current location (temp)*/
+.locationName{
+	color: yellow;
+	font-size: 20px;
+}
+
+.bottomBlock{
+	display: inline-block;
+	margin:10px;
+	width: 30%;
+}
+
+.resultLabel{
+	font-size:16px;
+	color:white;
+	white-space: nowrap;
+}
+
+
+</style>
+
+<div id="date">8/21/17</div>
+<div id="counterclock">CLOCK GOES HERE</div>
+
+<div class="contentArea">
+	<p>Discover the best time to view the</p>
+<h1 class="eclipseyear">2017</h1>
+<h1>Great American Eclipse</h1>
+
+<div id="zipcodeBlock">
+	<span>based on your area</span> <br>
+<input class="zipcodeInput" type="text" class='' pattern="[0-9]*" name="zip" id="zip" autofocus>
+	<div class="errorMessage noDisplay"></div>
+</div>
+
+<div class="outputBlock">
+	<div class="bottomBlock" id="localTime">
+	<div class="resultLabel">Based on your area</div>
+	<div class="result localtimeNum"> TIME </div> 
+
+	<div class ="locationName">City name here</div>
+</div>
+
+<div class="bottomBlock" id="totalEclipseLocal">
+	<div class="resultLabel">Closest location to view the total eclipse</div>
+	<div class="result cityName"> CITY</div> 
+</div>
+
+<div  class="bottomBlock" id="travelTime">
+	<div class="resultLabel">Estimate driving time</div>
+	<div class="result travelTime">TRAVEL</div> 
+</div>
+
+</div>
+</div>
+
+<!-- API CALLS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+// Getting Zip code from zippopotam.us
+$(function() {
+
+	// OnKeyDown Function
+	$("#zip").keydown(function() {
+		var zip_in = $(this);
+		var zip_box = $('#zipcodeBlock');
+		var errorBox = $('.errorMessage');
+		var locationName = $('.locationName');
+		
+		if (zip_in.val().length<5)
+		{
+			// console.log("more number needed")
+			// errorBox.removeClass('noDisplay').text("more number needed");
+		}
+		else if ( zip_in.val().length>5)
+		{
+				// console.log('Too many numbers')
+			// zip_box.addClass('error').removeClass('success');
+			// errorBox.removeClass('noDisplay').text("Too many numbers");
+		}
+		else if ((zip_in.val().length == 5) ) 
+		{
+			// Make HTTP Request
+		var ajax1= 	$.ajax({
+				url: "http://maps.googleapis.com/maps/api/geocode/json?address=" + zip_in.val(),
+				cache: false,
+				dataType: "json",
+				type: "GET",
+			  success: function(result, success) {
+
+
+					// US Zip Code Records Officially Map to only 1 Primary Location
+					cityName = result['results'][0].address_components[2].long_name;
+					stateName = result['results'][0].address_components[4].short_name;
+					places = cityName + ', ' + stateName;
+					console.log(places);
+					// cityName = places['place name'];
+					// stateName = places['state'];
+
+					// city_stateName = cityName + ", " + stateName;
+					// // zip_box.addClass('success').removeClass('error');
+					// locationName.text(city_stateName);
+					// console.log(city_stateName);
+				}
+				// ,
+				// error: function(result, success) {
+				// 	// console.log("etwas ist fehl")
+				// 	// zip_box.removeClass('success').addClass('error');
+				// }
+			});
+
+			
+		}
+});
+
+//end of document.ready();
+});
+	
+</script>
+
+
+
+</body>
+</html>

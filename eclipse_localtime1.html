@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title></title>
+</head>
+<body>
+
+<script>
+
+
+var a1 = $.ajax({
+	dataType: 'json',
+    url: 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc=Metropolis,%20IL&format=json'
+	}).done(function(locData) {
+		localEclipseTime = locData.local_data[0].time;
+		console.log(localEclipseTime);
+			// places = zipResult['places'][0];
+			// 		cityName = places['place name'];
+			// 		stateName = places['state'];
+
+			// 		city_stateName = cityName + ", " + stateName;
+					// zip_box.addClass('success').removeClass('error');
+					// locationName.text(city_stateName);
+					// console.log(locTime);
+	})
+
+
+// 	function second(){
+// 	return $.ajax({ 
+//   dataType: "json",
+//   // url: BaseUsnoUrl + totalEclipseCityState + formatJson,
+//   url: BaseUsnoUrl + 'Boston, MA' + formatJson,
+//   async: true,
+//   success: function(data2) {
+//   	localEclipseTime = data2.local_data[0].time;
+//   	console.log(localEclipseTime);
+
+//   }  
+// });
+
+// }
+
+// 	,
+
+//     a2 = $.ajax({
+// 	dataType: 'json',
+//     url: 'totalEclipse_lat_long.json'
+//     }).done(function(cityState2) {
+// 		totalEclipseCityState2 = cityState2.locations[1000].CITY + ", " + cityState2.locations[1000].STATE;
+// 	        // console.log(totalEclipseCityState2);
+// 	});
+
+// $.when(a1, a2).done(function(r1, r2) {
+//  // var totalEclipseCityState = r1[0].locations[1000].CITY + ", " r1[0].locations[1000].STATE;
+//  // var totalEclipseCityState2 = r2[0].locations[1001].CITY + ", " r2[0].locations[1001].STATE;
+
+// console.log("from when and done : "+ city_stateName);
+// console.log("from when and done : "+ totalEclipseCityState2);
+
+// });
+
+
+
+
+
+</script>
+</body>
+</html>

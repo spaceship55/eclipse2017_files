@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title></title>
+</head>
+<body>
+
+<div id="countdown"></div>
+
+<script>
+
+//1) get the zip code from user & send to google to fetch city/state
+var a1 = $.ajax({
+	dataType: 'json',
+    url: "http://maps.googleapis.com/maps/api/geocode/json?address="  + '10001'
+	}).done(function(zipResult) {
+			cityName = zipResult['results'][0].address_components[2].long_name;
+					stateName = zipResult['results'][0].address_components[4].short_name;
+					city_stateName = cityName + ', ' + stateName;
+					// console.log(city_stateName);
+	
+	//end of a1				
+	}),
+
+//2) send city/state name to USNO API to fetch local eclipse time  & lat/long data
+    a2 = a1.then(function(locInfo) {
+    		
+    		var navyUrl = 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc=',
+    			jsonFormat = '&format=json';
+    			console.log('url is :   ' + navyUrl + city_stateName + jsonFormat );
+             // .then() returns a new promise
+             return $.ajax({
+					dataType: 'json',
+				    url: 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc='+ city_stateName + '&format=json'
+				     
+				    }).done(function(locData) {
+
+			    		localEclipseTime = locData.local_data[0].time;
+			    			//trimming local time to calculate countdown
+			    		// var string = "this is a string";
+						var length = 5;
+						trimmedlocalEclipseTime = localEclipseTime.substring(0, length);
+
+			    		localLat = locData.lat;
+			    		localLon = locData.lon;
+			    		console.log("trimmed localEclipseTime is :  " + trimmedlocalEclipseTime);
+			    		console.log('local latitude is : ' + localLat);
+			    		console.log('local longitudse is : ' + localLon);
+			    		
+					});
+     // end of a2        	
+ 	}),
+
+//3) send local time to calculate countdown time and show it
+ 	countDownClock = a2.then(function(calculateClock){
+		
+		console.log("local time from countDownClock : " +  trimmedlocalEclipseTime);
+
+		// var end = new Date('08/21/2017 10:1 AM');
+		var end = new Date('08/21/2017 '+ trimmedlocalEclipseTime);
+		console.log("date from end var : "+ end);
+
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            document.getElementById('countdown').innerHTML = 'EXPIRED!';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+        document.getElementById('countdown').innerHTML = days + ':' + hours + ':' + minutes + ':' + seconds;
+    }
+    timer = setInterval(showRemaining, 1000);
+
+
+	});
+
+// a2.done(function(data) {
+//     console.log(data);
+// });
+
+
+
+
+
+
+</script>
+</body>
+</html>
