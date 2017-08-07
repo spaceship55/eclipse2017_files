@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="groups"></div>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+/*
+// This is a sample from totalEclipse_lat_long.json
+
+var tlisting = { "locations":[
+ {
+   "CITY": "Adair Village",
+   "STATE": "OR",
+   "latitude": 44.670676,
+   "longitude": -123.217876,
+   "name": "Adair Village, OR",
+   "desc": "Adair Village, Benton County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Albany",
+   "STATE": "OR",
+   "latitude": 44.636507,
+   "longitude": -123.105932,
+   "name": "Albany, OR",
+   "desc": "Albany, Linn County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Amity",
+   "STATE": "OR",
+   "latitude": 45.118062,
+   "longitude": -123.205583,
+   "name": "Amity, OR",
+   "desc": "Amity, Yamhill County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ }]};
+*/
+
+/////=========///////
+
+// File from Stackoverflow:
+// https://stackoverflow.com/questions/15671999/json-longitude-latitude-nearest-location
+
+var jsonString =
+    '{"City A":{"Position":{"Longitude":9.96233,"Latitude":49.80404}},"City B":{"Position":{"Longitude":6.11499,"Latitude":50.76891}},"City C":{"Position":{"Longitude":6.80592,"Latitude":51.53548}},"City D":{"Position":{"Longitude":9.50523,"Latitude":51.31991}},"City E":{"Position":{"Longitude":9.66089,"Latitude":48.70158}},"City F":{"Position":{"Longitude":9.93368,"Latitude":53.55608}},"City G":{"Position":{"Longitude":11.56122,"Latitude":48.14496}},"City H":{"Position":{"Longitude":13.34253,"Latitude":52.5319}},"City I":{"Position":{"Longitude":6.11327,"Latitude":50.77715}},"City J":{"Position":{"Longitude":13.36671,"Latitude":52.54344}}}';
+
+var myData = JSON.parse(jsonString);
+
+$(document).ready(function () {
+
+    var distanceObj = [],
+        i = 0;
+
+    $.each(myData, function (a, b) {
+        distanceObj[i] = { distance: hesapla(9.9608999, 49.7222842, b.Position.Longitude, b.Position.Latitude), location: a };
+        ++i;
+    });
+
+    distanceObj.sort(function(a,b) {
+        return parseInt(a.distance) - parseInt(b.distance)
+    });
+
+    $.each(distanceObj, function(a, b) {
+        $('#groups').append('<li>' + b.location + ': ' + b.distance + 'm</li>');
+    });
+    
+    console.log(distanceObj);
+
+    function hesapla(meineLongitude, meineLatitude, long1, lat1) {
+        erdRadius = 6371;
+
+        meineLongitude = meineLongitude * (Math.PI / 180);
+        meineLatitude = meineLatitude * (Math.PI / 180);
+        long1 = long1 * (Math.PI / 180);
+        lat1 = lat1 * (Math.PI / 180);
+
+        x0 = meineLongitude * erdRadius * Math.cos(meineLatitude);
+        y0 = meineLatitude * erdRadius;
+
+        x1 = long1 * erdRadius * Math.cos(lat1);
+        y1 = lat1 * erdRadius;
+
+        dx = x0 - x1;
+        dy = y0 - y1;
+
+        d = Math.sqrt((dx * dx) + (dy * dy));
+
+
+        return Math.round(d * 1000);
+    };
+
+});
+
+
+//end of document ready
+});
+
+</script>
+
+</body>
+</html>
