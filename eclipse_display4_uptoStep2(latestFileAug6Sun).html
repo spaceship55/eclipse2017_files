@@ -9,18 +9,25 @@
 
 <style>
 
-body{
-	/*background-color: black;*/
-	background-image: url("eclipse_bg_darker.png");
-	background-repeat:no-repeat;
-	/*background-size:contain;*/
-	background-position:center;
+body, html{
+	height: 100%;
+	margin:0;
 	font-family: Helvetica;
 }
 
-/*#contentContainer{
+#contentContainer{
+/* full page background image */
+	background-image: url("eclipse_bg_empty.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	background-position:center;
+	height: 100%;
 
-}*/
+}
+
+.topLeft{
+	padding:20px;
+}
 
 h1, h3 {
 	text-align: center;
@@ -129,11 +136,12 @@ span{
 
 </style>
 
-<!-- <div id="contentContainer"> -->
+<div id="contentContainer">
 	
-
+<div class="topLeft">
 <div id="date">8/21/17</div>
 <div id="countdown">CLOCK GOES HERE</div>
+</div>
 
 <div class="contentArea">
 	<p>Discover the best time to view the</p>
@@ -169,7 +177,7 @@ span{
 </div>
 </div>
 
-<!-- </div> -->
+</div>
 
 <!-- API CALLS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -230,7 +238,9 @@ $(function() {
 
 
 
-//1) get the zip code from user & send to google to fetch city/state
+//1) get the zip code from user 
+
+// & send to google to fetch city/state
 // var a1 = $.ajax({
 // 	dataType: 'json',
 //     url: "http://maps.googleapis.com/maps/api/geocode/json?address="  + zip_in.val()

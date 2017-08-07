@@ -5,21 +5,35 @@
 </head>
 <body>
 
+<div>test</div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(function() {
+console.log('here')
 
 $.ajax({
 url:"totalEclipse_lat_long.json",
 type:"POST",
 dataType : "json",
 success:function(msg){
+	console.log("det werks")
     console.log(msg);
 	// console.log(msg.locations[0].latitude);
-    }
+
+	// for (var prop in val2) {
+ //    array2.push(val2[prop]);
+	// 	}
+
+	// }
 });
 
+// var array2 = [];
+// console.log('array2 show me  : ')
+// console.log(array2)
 
+
+});
 
 </script>
 

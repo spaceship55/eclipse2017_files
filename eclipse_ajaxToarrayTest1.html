@@ -87,25 +87,53 @@ $(document).ready(function () {
 // case 2
 ////////////
 
-  var items2 = [];
+// var items2 = [];
+
 $.getJSON( "totalEclipse_lat_long.json", function( data2 ) {
 	console.log("data2 kommt hunter : ")
 	console.log(data2);
+	// console.log("data2.locations[0] zeigen mir bitte : ")
+	// console.log(data2.locations[0]);
+	// console.log(data2.locations[1]);
 
 
-for (var x in data2) {
-    items2.push(data2[x]);
-}
+
+var val2 = jQuery.parseJSON(JSON.stringify(data2));
+	console.log("val from val : ")
+	console.log(val2)
+
 
 });
+
+
+var array2 = [];
+for (var prop in val2) {
+    array2.push(val2[prop]);
+}
+console.log('array2 show me  : ')
+console.log(array2)
+
+
+
+
+	// console.log(val2.locations[0].CITY);
+
+
+
+
+// var result = [{ "id": "1132", "city": "Manila Central Post Office", "province": "Manila" }];
+// var val = jQuery.parseJSON(JSON.stringify(result));
+// console.log(val[0].city);
+
+
  
-  var items2 = [];
+  
+  
+ // console.log('items2 kommt hereunter ARRAY : ');
+ // console.log(items2);
 
- console.log('items2 kommt hereunter : ');
- console.log(items2);
-
- console.log('item2 first element is : ' + ' it should give a list ');
- console.log(items2[0][0].CITY)
+ // console.log('item2 first element is : ' + ' it should give a list ');
+ // console.log(items2[0][0].CITY)
 
  //testing out ajax to array and accessing it
 

@@ -8,22 +8,27 @@
 $(document).ready(function () {
 
 // ======== //
-$.ajax({
-url:"totalEclipse_lat_long.json",
-type:"POST",
-dataType : "json",
-success:function(msg){
-    // console.log('msg is : ' +  msg);
-    tInfo = msg;
-    // console.log(msg.locations[0].latitude);
-    t_latitude = msg.locations[0].latitude;
-    t_longitude = msg.locations[0].longitude;
-    console.log('t_latitude is : ' +  t_latitude)
-    console.log('t_longitude is : ' + t_longitude)
+// $.ajax({
+// url:"totalEclipse_lat_long.json",
+// type:"POST",
+// dataType : "json",
+// success:function(msg){
+//     // console.log('msg is : ' +  msg);
+//     tInfo = msg;
+//     // console.log(msg.locations[0].latitude);
+//     t_latitude = msg.locations[0].latitude;
+//     t_longitude = msg.locations[0].longitude;
+//     console.log('t_latitude is : ' +  t_latitude)
+//     console.log('t_longitude is : ' + t_longitude)
 
-    }
-});
+//     }
+// });
 
+//#### How to return result from ajax call #####
+//https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call
+
+//Using a function to fetch the result again
+//successCallBack(data) calls function successCallBack(dataObj){} 
 
 
 $.ajax({
@@ -31,35 +36,87 @@ $.ajax({
     url: 'totalEclipse_lat_long.json',
     dataType: 'json',
     success: function(data) { 
-      totalEclipseCity = data.locations[0].CITY,
-      totalEclipseState = data.locations[0].STATE;
-      totalEclipselat = data.locations[0].latitude;
-      totalEclipselon = data.locations[0].longitude;
-        console.log('city is :'+ totalEclipseCity);
-        console.log('state is : '+ totalEclipseState);
-        console.log('lat is : '+ totalEclipselat);
-        console.log('lon is. :' +  totalEclipselon);
+      successCallBack(data);
+      // totalEclipseCity = data.locations[0].CITY,
+      // totalEclipseState = data.locations[0].STATE;
+      // totalEclipselat = data.locations[0].latitude;
+      // totalEclipselon = data.locations[0].longitude;
+      //   console.log('city is :'+ totalEclipseCity);
+      //   console.log('state is : '+ totalEclipseState);
+      //   console.log('lat is : '+ totalEclipselat);
+      //   console.log('lon is. :' +  totalEclipselon);
       }
 });
 
- var gLat;
+// function successCallBack(dataObj){
+//   console.log("dataobj below : ")
+//   console.log(JSON.stringify(dataObj));
+
+//   var aaa = JSON.stringify(dataObj);
+// }
+
+// console.log("aaa is below : ")
+// console.log(aaa);
 
 
+
+
+// $.ajax({
+//     type: 'POST',
+//     url: 'totalEclipse_lat_long.json',
+//     dataType: 'json'
+// }).done(function(data) { 
+//       totalEclipseCity = data.locations[0].CITY,
+//       // totalEclipseState = data.locations[0].STATE;
+//       // totalEclipselat = data.locations[0].latitude;
+//       // totalEclipselon = data.locations[0].longitude;
+
+//         console.log('city is :'+ totalEclipseCity);
+//         // console.log('state is : '+ totalEclipseState);
+//         // console.log('lat is : '+ totalEclipselat);
+//         // console.log('lon is. :' +  totalEclipselon);
+
+
+//       });
+
+
+
+
+
+
+
+function successCallBack(dataObj){
+  console.log("dataobj below : ")
+  
+  // SHALL NOT STRINGIFY AJAX CALL FROM JSON: IT IS NOT ARRAY
+  // var aaa = JSON.stringify(dataObj);
+  // console.log(aaa);
+
+  // console.log("data obj items GOOOOO : ")
+  // console.log(Array.isArray(aaa));
+
+  console.log(dataObj.locations[0]);
+
+ // var gLat;
 //Getting lat/lon from google
 var gettingList = $.ajax({
     dataType: 'json',
     url: "http://maps.googleapis.com/maps/api/geocode/json?address="  + '10001',
     type:"POST"
     }).done(function(info) {
+            console.log("info array goes below : ")
             console.log(info);
             gLat = info.results[0].geometry.location.lat;
             console.log('inside getting List : ' + gLat);
-            // console.log('inside getting list  : ' + info.results[0].geometry.location.lat );//works!
+            console.log('inside getting list  : ' + info.results[0].geometry.location.lat );//works!
     
     //end of gettingList              
     });
 
-console.log('outside getting list is : ' +  gLat);
+// console.log('outside getting list is : ' +  gLat);
+
+}
+
 
 
 
