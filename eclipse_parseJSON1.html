@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Create Object from JSON String</h2>
+
+<p id="demo"></p>
+
+<script>
+
+var tlisting = { "locations":[
+ {
+   "CITY": "Adair Village",
+   "STATE": "OR",
+   "latitude": 44.670676,
+   "longitude": -123.217876,
+   "name": "Adair Village, OR",
+   "desc": "Adair Village, Benton County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Albany",
+   "STATE": "OR",
+   "latitude": 44.636507,
+   "longitude": -123.105932,
+   "name": "Albany, OR",
+   "desc": "Albany, Linn County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Amity",
+   "STATE": "OR",
+   "latitude": 45.118062,
+   "longitude": -123.205583,
+   "name": "Amity, OR",
+   "desc": "Amity, Yamhill County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ }]};
+
+ //parsed into JSON
+ 
+// var tlisting_parsed =  JSON.parse(tlisting);
+// console.log('parsed tlisting below: ')
+// console.log(tlisting_parsed);
+
+
+//JSON into array
+var tlisting_arr = [];
+for (var prop in tlisting) {
+    tlisting_arr.push(tlisting[prop]);
+}
+console.log('tlisting kommt unter : ')
+console.log(tlisting)
+
+
+
+console.log('tlisting_arr longitude is : ' +  tlisting_arr[0][0].longitude);
+
+console.log('tlisting_arr as whole is below : ') 
+console.log(tlisting_arr);
+
+var myJsonString = JSON.stringify(tlisting_arr);
+console.log('stringified  : ' +  myJsonString)
+console.log(myJsonString);
+
+// var tlisting_arr_parsed =  JSON.parse(tlisting_arr);
+// console.log(tlisting_arr_parsed)
+
+
+
+</script>
+
+</body>
+</html>

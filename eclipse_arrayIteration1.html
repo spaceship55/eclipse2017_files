@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="groups"></div>
+
+<div id="groups11"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+	// console.log('vi ar har')
+
+
+
+var tlisting = { "locations":[
+ {
+   "CITY": "Adair Village",
+   "STATE": "OR",
+   "latitude": 44.670676,
+   "longitude": -123.217876,
+   "name": "Adair Village, OR",
+   "desc": "Adair Village, Benton County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Albany",
+   "STATE": "OR",
+   "latitude": 44.636507,
+   "longitude": -123.105932,
+   "name": "Albany, OR",
+   "desc": "Albany, Linn County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Amity",
+   "STATE": "OR",
+   "latitude": 45.118062,
+   "longitude": -123.205583,
+   "name": "Amity, OR",
+   "desc": "Amity, Yamhill County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ }]};
+
+ //parsed into JSON
+
+// var tlisting_parsed =  JSON.parse(tlisting);
+// console.log('parsed tlisting below: ')
+// console.log(tlisting_parsed);
+
+
+//JSON into array
+var tlisting_arr = [];
+for (var prop in tlisting) {
+    tlisting_arr.push(tlisting[prop]);
+}
+console.log('tlisting kommt unter : ')
+console.log(tlisting)
+
+// console.log('tlisting_arr is : ' +  tlisting_arr[0][0].longitude);
+
+console.log('tlisting_arr as whole is below : ') 
+console.log(tlisting_arr);
+// console.log(tlisting_arr[0][0].name);
+
+
+// var myStringArray = ["Hello","World"];
+// var arrayLength = myStringArray.length;
+// for (var i = 0; i < arrayLength; i++) {
+//     console.log(myStringArray[i]);
+    
+// }
+
+
+// var tArrayLength = tlisting_arr.length;
+// for (var i = 0; i < tArrayLength; i++) {
+//     // console.log('i ist : ' + i)
+//     console.log(tlisting_arr[i]);
+//     for (var j = 0; j < tArrayLength; j++) {
+//       console.log('gehen uberhaupt alles : ')
+//         console.log(tlisting_arr[i].CITY);
+//     }
+    
+// }
+
+// tlisting_arr.map( function(item) {
+//      console.log(item);
+// })
+
+
+// var cubes = [
+//  [1, 2, 3],
+//  [4, 5, 6],    
+//  [7, 8, 9],
+// ];
+
+
+var i, j;
+
+for (i = 0; i < tlisting_arr.length; i++) {
+    for (j = 0; j < tlisting_arr[i].length; j++) {
+       console.log(tlisting_arr[i][j].CITY);
+    }
+}
+
+
+
+  
+// var a = ["a", "b", "c"];
+// tlisting_arr.forEach(function (entry) {
+//     console.log(entry);
+//     var entry;
+// });
+
+
+
+// var cubes = [
+//  [1, 2, 3],
+//  [4, 5, 6],    
+//  [7, 8, 9],
+// ];
+
+
+// var i, j;
+
+// for (i = 0; i < cubes.length; i++) {
+//     for (j = 0; j < cubes[i].length; j++) {
+//        console.log(cubes[i][j]);
+//     }
+// }
+
+//end of document ready
+});
+
+</script>
+
+</body>
+</html>

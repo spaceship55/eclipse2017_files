@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="groups"></div>
+
+<div id="groups11"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+
+var tlisting = { "locations":[
+ {
+   "CITY": "Adair Village",
+   "STATE": "OR",
+   "latitude": 44.670676,
+   "longitude": -123.217876,
+   "name": "Adair Village, OR",
+   "desc": "Adair Village, Benton County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Albany",
+   "STATE": "OR",
+   "latitude": 44.636507,
+   "longitude": -123.105932,
+   "name": "Albany, OR",
+   "desc": "Albany, Linn County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Amity",
+   "STATE": "OR",
+   "latitude": 45.118062,
+   "longitude": -123.205583,
+   "name": "Amity, OR",
+   "desc": "Amity, Yamhill County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ }]};
+
+//JSON into array
+var tlisting_arr = [];
+for (var prop in tlisting) {
+    tlisting_arr.push(tlisting[prop]);
+}
+console.log('tlisting kommt unter : ')
+console.log(tlisting)
+
+console.log('tlisting_arr as whole is below : ') 
+console.log(tlisting_arr);
+
+// var obj = {
+//   "flammable": "inflammable",
+//   "duh": "no duh"
+// };
+// $.each( obj, function( key, value ) {
+//   console.log( key + ": " + value );
+// });
+
+// arr1 =[];
+
+// $.each( tlisting_arr, function( key, value ) {
+//   console.log( key + ": " + value[0].CITY );
+
+
+// });
+
+// $.each(tlisting_arr.split(','), function(index, value) { 
+//   console.log(index + ': ' + value); 
+// });
+
+
+
+// var finalArr =[];
+
+// $.each( tlisting_arr, function( index, value ){
+//        tlisting_arr[index].name = index;
+//        console.log(tlisting_arr[index].name);
+//         // finalArr.push(tlisting_arr[index]);
+// });
+
+     
+
+
+
+/////////////
+// var sum = 0;
+ 
+// var arr = [ 1, 2, 3, 4, 5 ];
+
+// $.each( arr, function( index, value ){
+//     sum += value;
+// });
+ 
+// console.log( sum );
+
+});
+/////////////
+
+
+
+
+</script>
+
+</body>
+</html>

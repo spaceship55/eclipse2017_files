@@ -53,9 +53,11 @@ to calculate the travel distance
 
 
 APIs:
-City and state from zip code: http://maps.googleapis.com/maps/api/geocode/json?address=77379
+City and state from zip code: http://api.zippopotam.us/us/77379
 Eclipse data (local time, latitude & longitude) : http://aa.usno.navy.mil/data/docs/api.php#soleclipse
-Calculating distance: google distance matrix API(https://developers.google.com/maps/documentation/distance-matrix/start)
+Calculating distance: google distance matrix API :
+- homepage:  https://developers.google.com/maps/documentation/distance-matrix/start)
+- API lnk:  https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=YOUR_API_KEY
 
 
 Misc. sources:

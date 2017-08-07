@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="groups"></div>
+
+<div id="groups11"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+	// console.log('vi ar har')
+
+
+
+var tlisting = { "locations":[
+ {
+   "CITY": "Adair Village",
+   "STATE": "OR",
+   "latitude": 44.670676,
+   "longitude": -123.217876,
+   "name": "Adair Village, OR",
+   "desc": "Adair Village, Benton County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Albany",
+   "STATE": "OR",
+   "latitude": 44.636507,
+   "longitude": -123.105932,
+   "name": "Albany, OR",
+   "desc": "Albany, Linn County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Amity",
+   "STATE": "OR",
+   "latitude": 45.118062,
+   "longitude": -123.205583,
+   "name": "Amity, OR",
+   "desc": "Amity, Yamhill County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ }]};
+
+ //parsed into JSON
+
+// var tlisting_parsed =  JSON.parse(tlisting);
+// console.log('parsed tlisting below: ')
+// console.log(tlisting_parsed);
+
+
+//JSON into array
+var tlisting_arr = [];
+for (var prop in tlisting) {
+    tlisting_arr.push(tlisting[prop]);
+}
+console.log('tlisting kommt unter : ')
+console.log(tlisting)
+
+// console.log('tlisting_arr is : ' +  tlisting_arr[0][0].longitude);
+
+console.log('tlisting_arr as whole is below : ') 
+console.log(tlisting_arr);
+// console.log(tlisting_arr[0][0].name);
+
+
+var myList11 =[];
+
+    $.each(tlisting_arr, function (a1, b1) {
+
+    	console.log('inside each function')
+
+    	//lon and lat of a city chosen from zip code
+    	originLon11 = 9.9608999,
+    	originLat11 = 49.7222842;
+
+    	destLon11 = bb.tlisting_arr.longitude;
+    	destLat11 = bb.tlisting_arr.latitude;
+
+    	// destLon1 =  tlisting.locations[0].longitude;
+    	// destLat2 =  tlisting.locations[0].latitude;
+    	console.log('destLon11 is : ' +  tlisting_arr.longitude);
+    	console.log('destLat11 is : ' +  tlisting.locations.latitude);
+
+        // myData[a].distance = hesapla(originLon, originLat, destLon, destLat);
+        tlisting_arr[aa].distance = hesapla(originLon11, originLat11, destLon11, destLat11);
+        // console.log ("myList longitude ist : " +  destLon);
+        // console.log ("myList Latitude ist : " +  b.Position.Latitude);
+
+        tlisting_arr[aa].name = aa;
+        myList11.push(tlisting_arr[aa]);
+
+        console.log('myData11 aa is : below') 
+        console.log(tlisting_arr[aa].name);
+
+
+        // console.log(' myList myData a from push ist : ' + a );
+        console.log('myList11 is. : ' )
+        console.log(myList11);
+    });
+
+        myList11.sort(function(a,b){
+        return aa.distance - bb.distance;
+    });
+
+
+$("#groups11").append('<li><h2>' +'Name is : ' +  myList[0].name + '</h2><p>' + 'Distance is : ' + schoneStrecke(myList[0].distance) + '</p></a></li>');
+
+
+/////=========///////
+//myList original
+// var jsonString =
+//     '{"City A":{"Position":{"Longitude":9.96233,"Latitude":49.80404}},"City B":{"Position":{"Longitude":6.11499,"Latitude":50.76891}},"City C":{"Position":{"Longitude":6.80592,"Latitude":51.53548}},"City D":{"Position":{"Longitude":9.50523,"Latitude":51.31991}},"City E":{"Position":{"Longitude":9.66089,"Latitude":48.70158}},"City F":{"Position":{"Longitude":9.93368,"Latitude":53.55608}},"City G":{"Position":{"Longitude":11.56122,"Latitude":48.14496}},"City H":{"Position":{"Longitude":13.34253,"Latitude":52.5319}},"City I":{"Position":{"Longitude":6.11327,"Latitude":50.77715}},"City J":{"Position":{"Longitude":13.36671,"Latitude":52.54344}}}';
+
+// var myData = JSON.parse(jsonString);
+
+// 	console.log('myData comes below: ')
+// 	console.log(myData);
+//    console.log(' my datas latttttttt : ' +  myData);
+
+// 	// console.log('myData is '  + myData)
+    
+//     var myListAfterCal = [];
+//     console.log('myList kommt below: ')
+//     console.log(myListAfterCal)
+//     // var myList1 = [];
+
+
+
+//     $.each(myData, function (a, b) {
+
+//     	//lon and lat of a city chosen from zip code
+//     	originLon = 9.9608999,
+//     	originLat = 49.7222842;
+
+//     	destLon = b.Position.Longitude;
+//     	destLat = b.Position.Latitude;
+
+//         myData[a].distance = hesapla(originLon, originLat, destLon, destLat);
+//         console.log ("myList LONGITUDE ist : " +  destLon);
+//         // console.log ("myList Latitude ist : " +  b.Position.Latitude);
+
+//         myData[a].name = a;
+//         myListAfterCal.push(myData[a]);
+
+//         console.log('myData a is : '+ myData[a].name);
+
+//         // console.log(' myList myData a from push ist : ' + a );
+//         console.log('myListAfterCal is. : ' + myListAfterCal);
+//     });
+
+
+
+//     myListAfterCal.sort(function(a,b){
+//         return a.distance - b.distance;
+//     });
+
+//  $("#groups").append('<li><h2>' +'Name is : ' +  myListAfterCal[0].name + '</h2><p>' + 'Distance is : ' + schoneStrecke(myListAfterCal[0].distance) + '</p></a></li>');
+ // $("#groups").append('<li><h2>' + myListAfterCal[1].name + '</h2><p>' + schoneStrecke(myLmyListAfterCalist[1].distance) + '</p></a></li>');
+
+
+// ========= //
+//hesapla calculation code //
+
+
+    function hesapla(meineLongitude, meineLatitude, long1, lat1) {
+        erdRadius = 6371;
+
+        meineLongitude = meineLongitude * (Math.PI / 180);
+        meineLatitude = meineLatitude * (Math.PI / 180);
+        long1 = long1 * (Math.PI / 180);
+        lat1 = lat1 * (Math.PI / 180);
+
+        x0 = meineLongitude * erdRadius * Math.cos(meineLatitude);
+        y0 = meineLatitude * erdRadius;
+
+        x1 = long1 * erdRadius * Math.cos(lat1);
+        y1 = lat1 * erdRadius;
+
+        dx = x0 - x1;
+        dy = y0 - y1;
+
+        d = Math.sqrt((dx * dx) + (dy * dy));
+        return d;
+    }
+    function schoneStrecke(d){
+        if (d < 1) {
+            return Math.round(d * 1000) +" m";
+        } else {
+            return Math.round(d * 10) / 10 +" km";
+        }
+    };
+
+
+
+//end of document ready
+});
+
+</script>
+
+</body>
+</html>

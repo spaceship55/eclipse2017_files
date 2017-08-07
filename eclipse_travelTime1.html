@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<div id="travel_data">
+	
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<script>
+
+
+var directionsService = new google.maps.DirectionsService();
+
+var request = {
+  origin      : 'Melbourne VIC', // a city, full address, landmark etc
+  destination : 'Sydney NSW',
+  travelMode  : google.maps.DirectionsTravelMode.DRIVING
+};
+
+directionsService.route(request, function(response, status) {
+  if ( status == google.maps.DirectionsStatus.OK ) {
+    console.log( response.routes[0].legs[0].distance.value ); // the distance in metres
+  }
+  else {
+    console.log('oops, there is no route between these two locations /n every time this happens, a kitten dies /n so please, ensure your address is formatted properly');
+  }
+});
+
+</script>
+</body>
+</html>

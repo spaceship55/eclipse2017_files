@@ -8,43 +8,58 @@
 $(document).ready(function () {
 
 // ======== //
-// $.ajax({
-// url:"totalEclipse_lat_long.json",
-// type:"POST",
-// dataType : "json",
-// success:function(msg){
-//     console.log(msg);
-//     tInfo = msg;
-//     // console.log(msg.locations[0].latitude);
-//     t_latitude = msg.locations[0].latitude;
-//     t_longitude = msg.locations[0].longitude;
-//     // console.log(t_latitude)
-//     // console.log(t_longitude)
+$.ajax({
+url:"totalEclipse_lat_long.json",
+type:"POST",
+dataType : "json",
+success:function(msg){
+    // console.log('msg is : ' +  msg);
+    tInfo = msg;
+    // console.log(msg.locations[0].latitude);
+    t_latitude = msg.locations[0].latitude;
+    t_longitude = msg.locations[0].longitude;
+    console.log('t_latitude is : ' +  t_latitude)
+    console.log('t_longitude is : ' + t_longitude)
 
-//     }
-// });
+    }
+});
 
-// console.log('whatever');
-// console.log(t_latitude);
-// console.log("tInfo is : " +  tInfo);
 
+
+$.ajax({
+    type: 'GET',
+    url: 'totalEclipse_lat_long.json',
+    dataType: 'json',
+    success: function(data) { 
+      totalEclipseCity = data.locations[0].CITY,
+      totalEclipseState = data.locations[0].STATE;
+      totalEclipselat = data.locations[0].latitude;
+      totalEclipselon = data.locations[0].longitude;
+        console.log('city is :'+ totalEclipseCity);
+        console.log('state is : '+ totalEclipseState);
+        console.log('lat is : '+ totalEclipselat);
+        console.log('lon is. :' +  totalEclipselon);
+      }
+});
+
+ var gLat;
 
 
 //Getting lat/lon from google
-
-
 var gettingList = $.ajax({
     dataType: 'json',
     url: "http://maps.googleapis.com/maps/api/geocode/json?address="  + '10001',
     type:"POST"
     }).done(function(info) {
             console.log(info);
-            console.log('inside getting list  : ' + info.results[0].geometry.location.lat );//works!
+            gLat = info.results[0].geometry.location.lat;
+            console.log('inside getting List : ' + gLat);
+            // console.log('inside getting list  : ' + info.results[0].geometry.location.lat );//works!
     
-    //end of a1             
+    //end of gettingList              
     });
 
-// console.log('getting list is : ' +  gettingList.locations[0].CITY);
+console.log('outside getting list is : ' +  gLat);
 
 
 

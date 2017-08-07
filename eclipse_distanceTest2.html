@@ -9,28 +9,29 @@
 
  var tPlaces = $.ajax({
     dataType: 'json',
+    type:"POST",
     url: "totalEclipse_lat_long.json"
     }).done(function(tcityResult) {
             // console.log('alles gut');
 
-        var jsonT = $.parseJSON(tcityResult);
+        // var jsonT = $.parseJSON(tcityResult);
 
         console.log("ttcityResult ist : " + tcityResult);
 
-        tcity = tcityResult.locations[1].CITY;
-        tcityLat = tcityResult.locations[1].latitude;
-        tcityLon = tcityResult.locations[1].longitude;
+        // tcity = tcityResult.locations[1].CITY;
+        // tcityLat = tcityResult.locations[1].latitude;
+        // tcityLon = tcityResult.locations[1].longitude;
 
 
-        console.log("city name is :" + tcity);            
-         console.log("city latitude is : " +  tcityLat); 
-          console.log("cit longitude is : " + tcityLon); 
+        // console.log("city name is :" + tcity);            
+        //  console.log("city latitude is : " +  tcityLat); 
+        //   console.log("cit longitude is : " + tcityLon); 
 
-           tData = JSON.parse(jsonT);
-               console.log('tData ist : ' + tData);
+        //    tData = JSON.parse(jsonT);
+        //        console.log('tData ist : ' + tData);
     });
 
-console.log('tPlaces ist : '+ tPlaces);
+// console.log('tPlaces ist : '+ tPlaces);
 
 
 $(document).ready(function () {

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="groups"></div>
+
+<div id="groups11"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+var tlisting = { "locations":[
+ {
+   "CITY": "Adair Village",
+   "STATE": "OR",
+   "latitude": 44.670676,
+   "longitude": -123.217876,
+   "name": "Adair Village, OR",
+   "desc": "Adair Village, Benton County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Albany",
+   "STATE": "OR",
+   "latitude": 44.636507,
+   "longitude": -123.105932,
+   "name": "Albany, OR",
+   "desc": "Albany, Linn County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ },
+ {
+   "CITY": "Amity",
+   "STATE": "OR",
+   "latitude": 45.118062,
+   "longitude": -123.205583,
+   "name": "Amity, OR",
+   "desc": "Amity, Yamhill County, OR, US",
+   "color": "",
+   "FIELD8": ""
+ }]};
+
+
+// $.getJSON( "totalEclipse_lat_long.json", function( data ) {
+//     console.log('loaded');
+//     var departement = []; // create array here
+//     $.each(data.personnes, function (index, personne) {
+//         departement.push(personne.departement); //push values here
+//     });
+//     console.log(departement); // see the output here
+// });
+
+
+
+//  $.ajax({
+// url:"totalEclipse_lat_long.json",
+// type:"POST",
+// dataType : "json",
+// success:function(msg){
+//    something= JSON.parse(msg);
+//    console.log(something);
+
+//   //   console.log(msg);
+//   // console.log(msg.locations[0].latitude);
+//     }
+// });
+
+    // console.log(msg);
+  // console.log(msg.locations[0].latitude);
+
+
+$.getJSON('totalEclipse_lat_long.json',function (data) {   
+    for (var i = 0; i < data.length; i++) {
+        name.push( data[i].name );
+        address.push( data[i].address );
+        city.push( data[i].city );
+    }
+});
+
+
+
+
+//JSON into array
+var tlisting_arr = [];
+for (var prop in tlisting) {
+    tlisting_arr.push(tlisting[prop]);
+}
+console.log('tlisting kommt unter : ')
+console.log(tlisting)
+
+// console.log('tlisting_arr is : ' +  tlisting_arr[0][0].longitude);
+
+console.log('tlisting_arr as whole is below : ') 
+console.log(tlisting_arr);
+// console.log(tlisting_arr[0][0].name);
+
+
+var myList11 =[];
+
+
+//for loop test 
+
+// var goOverEach = function (a1, b1) { 
+
+var i, j, a11, b11;
+
+for (i = 0; i < tlisting_arr.length; i++) {
+    for (j = 0; j < tlisting_arr[i].length; j++) {
+       console.log('city names '+ tlisting_arr[i][j].CITY);
+
+      originLon11 = 9.9608999,
+      originLat11 = 49.7222842;
+
+      destLon11 = tlisting_arr[i][j].longitude;
+      destLat11 = tlisting_arr[i][j].latitude;
+
+      console.log('dest lon is : ' + destLon11);//works
+      console.log('dest lat is : ' +  destLat11);
+
+      // console.log(originLon11 + ' and  ' +  originLat11 + ' and ' +  destLon11 + ' and ' + destLat11)
+
+      tlisting_arr[i][j].distance = hesapla(originLon11, originLat11, destLon11, destLat11);
+
+      console.log('distace is : ' + tlisting_arr[i][j].distance);
+
+      console.log('myList so far : ' + myList11);
+
+      // myList11.push("[" + "'"  + tlisting_arr[i][j].name + "'"  + ", " +  tlisting_arr[i][j].distance + "]" );
+      myList11.push("'"  + tlisting_arr[i][j].name + "'"  + ", " +  tlisting_arr[i][j].distance);
+
+      console.log('myList after push : ' + myList11[0]);
+      // console.log('an item in myList : ' + myList11[0]);
+      console.log("is myList11 an array: " + Array.isArray(myList11));
+
+      // var test = "My 'cow always gives mi'lk";
+
+
+    }
+
+      // console.log('myList11 outside loop :' + myList11);
+
+      var sortedList =   myList11.sort(function(a,b){
+        return a[1] - b[1];
+        });
+
+      console.log('SortedList ar : ' +  sortedList);
+
+
+      var sliceNameOut = sortedList[0].match("'(.*)'"); 
+      var closestCity =sliceNameOut[1];
+
+      console.log('Slicing test here2 : ' + sliceNameOut[1]);
+
+
+
+//end of for loop//
+}
+
+$("#groups11").append('<li><h2>' + closestCity + '</h2></li>');
+
+
+// $("#groups11").append('<li><h2>' + sortedList[0] + '</h2><p>' + schoneStrecke(sortedList[1]) + '</p></a></li>');
+
+//hesapla code to calculate the distance b/w 2 points //
+
+
+    function hesapla(meineLongitude, meineLatitude, long1, lat1) {
+        erdRadius = 6371;
+
+        meineLongitude = meineLongitude * (Math.PI / 180);
+        meineLatitude = meineLatitude * (Math.PI / 180);
+        long1 = long1 * (Math.PI / 180);
+        lat1 = lat1 * (Math.PI / 180);
+
+        x0 = meineLongitude * erdRadius * Math.cos(meineLatitude);
+        y0 = meineLatitude * erdRadius;
+
+        x1 = long1 * erdRadius * Math.cos(lat1);
+        y1 = lat1 * erdRadius;
+
+        dx = x0 - x1;
+        dy = y0 - y1;
+
+        d = Math.sqrt((dx * dx) + (dy * dy));
+        return d;
+    }
+    function schoneStrecke(d){
+        if (d < 1) {
+            return Math.round(d * 1000) +" m";
+        } else {
+            return Math.round(d * 10) / 10 +" km";
+        }
+    };
+
+
+
+//end of document ready
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<html>
+<head>
+
+<title>Eclipse 2017 calculate distance </title>	
+</head>
+
+<body>
+
+
+<style>
+
+body{
+	/*background-color: black;*/
+	background-image: url("eclipse_bg_empty.jpg");
+	background-repeat:no-repeat;
+	/*background-size:contain;*/
+	background-position:center;
+	font-family: Helvetica;
+}
+
+/*#contentContainer{
+
+}*/
+
+h1, h3 {
+	text-align: center;
+	color:rgb(232, 165, 0);
+}
+
+.eclipseyear {
+font-size: 60px;
+margin-bottom: 10px;
+}
+
+.eclipseTitle{
+	margin-top: 10px;
+}
+
+.contentArea{
+	text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+#date{
+	color:white;
+}
+#countdown{
+	color:rgb(232, 165, 0);
+	font-size: 24px;
+	font-weight: bold;
+}
+
+span{
+	color:white;
+}
+
+#zipcodeBlock{
+	display: block;
+	margin:8%;
+}
+
+.zipcodeInput{
+	font-size:50px;
+	margin: 15px;
+	/*padding:15px;*/
+	opacity:0.6;
+	text-align: center;
+	font-weight: bold;
+	width:200px;
+
+}
+
+#refreshBtn{
+	height: 50px;
+	width: 100px;
+	font-size: 13px;
+}
+
+.errorMessage{
+	font-size: 20px;
+	color: red;
+}
+
+.noDisplay {
+	display: none;
+}
+
+.result{
+	color:rgb(232, 165, 0);
+	font-size: 30px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+.outputBlock{
+	margin:10px;
+}
+
+/*show current location (temp)*/
+.locationName{
+	color: yellow;
+	font-size: 20px;
+}
+
+.localtimeNum {
+	color:rgb(232, 165, 0);
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.bottomBlock{
+	display: inline-block;
+	margin:10px;
+	width: 30%;
+}
+
+.resultLabel{
+	font-size:16px;
+	color:white;
+	/*white-space: nowrap;*/
+	height: 33px;
+}
+
+
+</style>
+
+<!-- <div id="contentContainer"> -->
+	
+
+<div id="date">8/21/17</div>
+<div id="countdown">CLOCK GOES HERE</div>
+
+<div class="contentArea">
+	<p>Discover the best time to view the</p>
+<h1 class="eclipseyear">2017</h1>
+<h1 class="eclipseTitle">Great American Eclipse</h1>
+
+<div id="zipcodeBlock">
+	<span>based on your area</span> <br>
+<input class="zipcodeInput" type="text" class='' pattern="[0-9]*" name="zip" id="zip" autofocus>
+	<br>
+	<button id ="refreshBtn">Start again</button>
+	<div class="errorMessage noDisplay"></div>
+</div>
+
+<div class="outputBlock">
+	<div class="bottomBlock" id="localTime">
+	<div class="resultLabel">Based on your area</div>
+	<div class="result localtimeNum"> TIME </div> 
+
+	<!-- <div class ="locationName">City name here</div> -->
+</div>
+
+<div class="bottomBlock" id="totalEclipseLocal">
+	<div class="resultLabel">Closest location to view the total eclipse</div>
+	<div class="result cityName"> CITY</div> 
+</div>
+
+<div  class="bottomBlock" id="travelTime">
+	<div class="resultLabel">Estimate driving time</div>
+	<div class="result travelTime">TRAVEL</div> 
+</div>
+
+</div>
+</div>
+
+<!-- </div> -->
+
+<!-- API CALLS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+// Getting Zip code from zippopotam.us
+$(function() {
+
+		// refresh button
+        $('#refreshBtn').click(function() {
+            location.reload();
+            $('.zipcodeInput').val('').focus();
+        });
+
+	// OnKeyDown Function
+	$("#zip").keydown(function() {
+		var zip_in = $(this);
+		var zip_box = $('#zipcodeBlock');
+		var errorBox = $('.errorMessage');
+		var locationName = $('.locationName');
+		
+		if (zip_in.val().length<5)
+		{
+			// console.log("more number needed")
+			// errorBox.removeClass('noDisplay').text("more number needed");
+		}
+		else if ( zip_in.val().length>5)
+		{
+				// console.log('Too many numbers')
+			// zip_box.addClass('error').removeClass('success');
+			// errorBox.removeClass('noDisplay').text("Too many numbers");
+		}
+		else if ((zip_in.val().length == 5) ) 
+		{
+			// Make HTTP Request
+		// var a0 = $.ajax({
+		// 		url: "http://api.zippopotam.us/us/" + zip_in.val(),
+		// 		cache: false,
+		// 		dataType: "json",
+		// 		type: "GET",
+		// 	  success: function(result, success) {
+		// 			// US Zip Code Records Officially Map to only 1 Primary Location
+		// 			places = result['places'][0];
+		// 			cityName = places['place name'];
+		// 			stateName = places['state'];
+
+		// 			city_stateName = cityName + ", " + stateName;
+		// 			// zip_box.addClass('success').removeClass('error');
+		// 			locationName.text(city_stateName);
+		// 			console.log(city_stateName);
+		// 		}
+		// 		// ,
+		// 		// error: function(result, success) {
+		// 		// 	// console.log("etwas ist fehl")
+		// 		// 	// zip_box.removeClass('success').addClass('error');
+		// 		// }
+		// 	});
+
+
+
+//1) get the zip code from user & send to google to fetch city/state
+// var a1 = $.ajax({
+// 	dataType: 'json',
+//     url: "http://maps.googleapis.com/maps/api/geocode/json?address="  + zip_in.val()
+// 	}).done(function(zipResult) {
+// 			cityName = zipResult['results'][0].address_components[1].long_name;
+// 					stateName = zipResult['results'][0].address_components[3].short_name;
+// 					city_stateName = cityName + ', ' + stateName;
+// 					// console.log(city_stateName);
+	
+// 	//end of a1				
+// 	}),
+
+// with zippopotam.us API
+var a1 = $.ajax({
+	dataType: 'json',
+    url: "http://api.zippopotam.us/us/"  + zip_in.val()
+	}).done(function(zipResult) {
+			// US Zip Code Records Officially Map to only 1 Primary Location
+					places = zipResult['places'][0];
+					cityName = places['place name'];
+					stateName = places['state abbreviation'];
+
+					city_stateName = cityName + ", " + stateName;
+					// zip_box.addClass('success').removeClass('error');
+					locationName.text(city_stateName);
+					console.log(city_stateName);
+					
+	
+	//end of a1				
+	}),
+
+//2) send city/state name to USNO API to fetch local eclipse time  & lat/long data
+    a2 = a1.then(function(locInfo) {
+    		
+    		var navyUrl = 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc=',
+    			jsonFormat = '&format=json';
+    			console.log('url is :   ' + navyUrl + city_stateName + jsonFormat );
+             // .then() returns a new promise
+             return $.ajax({
+					dataType: 'json',
+				    url: 'http://api.usno.navy.mil/eclipses/solar?date=8/21/2017&loc='+ city_stateName + '&format=json'
+				     
+				    }).done(function(locData) {
+
+
+			    		localEclipseTime = locData.local_data[0].time;
+			    		$('.localtimeNum').html(localEclipseTime);
+			    			//trimming local time to calculate countdown
+			    		// var string = "this is a string";
+						var length = 5;
+						trimmedlocalEclipseTime = localEclipseTime.substring(0, length);
+
+			    		localLat = locData.lat;
+			    		localLon = locData.lon;
+			    		console.log("trimmed localEclipseTime is :  " + trimmedlocalEclipseTime);
+			    		console.log('local latitude is : ' + localLat);
+			    		console.log('local longitudse is : ' + localLon);
+			    		
+					});
+     // end of a2        	
+ 	}),
+
+//3) send local time to calculate countdown time and show it
+ 	countDownClock = a2.then(function(calculateClock){
+		
+		console.log("local time from countDownClock : " +  trimmedlocalEclipseTime);
+
+		// var end = new Date('08/21/2017 10:1 AM');
+		var end = new Date('08/21/2017 '+ trimmedlocalEclipseTime);
+		console.log("date from end var : "+ end);
+
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = end - now;
+        if (distance < 0) {
+
+            clearInterval(timer);
+            $('#countdown').innerHTML = 'EXPIRED!';
+
+            return;
+        }
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+        // $('#countdown').innerHTML = days + ':' + hours + ':' + minutes + ':' + seconds;
+        // $('#countdown').innerHTML = " ACHTUNG";
+        $('#countdown').html(days + ':' + hours + ':' + minutes + ':' + seconds);
+    }
+    timer = setInterval(showRemaining, 1000);
+
+
+	});
+
+
+
+
+
+
+
+
+
+		//end of else if line 161	 
+		}
+});
+
+
+
+
+
+
+//end of document.ready();
+});
+	
+</script>
+
+
+
+</body>
+</html>
