@@ -60,19 +60,16 @@ console.log(tlisting_arr);
 // console.log(tlisting_arr[0][0].name);
 
 
-var myList11 =[];
+
 
 
 //for loop test 
-
-// var goOverEach = function (a1, b1) { 
 
 var i, j, a11, b11;
 
 for (i = 0; i < tlisting_arr.length; i++) {
     for (j = 0; j < tlisting_arr[i].length; j++) {
        // console.log('city names '+ tlisting_arr[i][j].CITY);
-
       originLon11 = 9.9608999,
       originLat11 = 49.7222842;
 
@@ -87,7 +84,6 @@ for (i = 0; i < tlisting_arr.length; i++) {
       tlisting_arr[i][j].distance = hesapla(originLon11, originLat11, destLon11, destLat11);
 
       console.log('distace is : ' + tlisting_arr[i][j].distance);
-
       console.log('myList so far : ' + myList11);
 
       // myList11.push("[" + "'"  + tlisting_arr[i][j].name + "'"  + ", " +  tlisting_arr[i][j].distance + "]" );
@@ -127,8 +123,6 @@ $("#groups11").append('<li><h2>' + closestCity + '</h2></li>');
 // $("#groups11").append('<li><h2>' + sortedList[0] + '</h2><p>' + schoneStrecke(sortedList[1]) + '</p></a></li>');
 
 //hesapla code to calculate the distance b/w 2 points //
-
-
     function hesapla(meineLongitude, meineLatitude, long1, lat1) {
         erdRadius = 6371;
 

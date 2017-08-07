@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title></title>
+</head>
+
+<body>
+
+<style>
+/*#testJSONBtn{
+	width: 100px;
+	height:50px;
+}
+
+#JSONOutput {
+	color:yellow;
+}*/
+</style>
+
+<!-- 
+<button id="testJSONBtn">load ajax file</button>
+
+<div id="JSONOutput"></div> -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+// var tlisting = { "locations":[
+//  {
+//    "CITY": "Adair Village",
+//    "STATE": "OR",
+//    "latitude": 44.670676,
+//    "longitude": -123.217876,
+//    "name": "Adair Village, OR",
+//    "desc": "Adair Village, Benton County, OR, US",
+//    "color": "",
+//    "FIELD8": ""
+//  },
+//  {
+//    "CITY": "Albany",
+//    "STATE": "OR",
+//    "latitude": 44.636507,
+//    "longitude": -123.105932,
+//    "name": "Albany, OR",
+//    "desc": "Albany, Linn County, OR, US",
+//    "color": "",
+//    "FIELD8": ""
+//  },
+//  {
+//    "CITY": "Amity",
+//    "STATE": "OR",
+//    "latitude": 45.118062,
+//    "longitude": -123.205583,
+//    "name": "Amity, OR",
+//    "desc": "Amity, Yamhill County, OR, US",
+//    "color": "",
+//    "FIELD8": ""
+//  }]};
+
+
+////case 1) 
+//   var items = [];
+// $.getJSON( "TestJSON.json", function( data ) {
+
+//   // $.each( data, function( key, val ) {
+//   //   items.push( "<li id='" + key + "'>" + val + "</li>" );
+//   // });
+ 
+//   // $( "<ul/>", {
+//   //   "class": "my-new-list",
+//   //   html: items.join( "" )
+//   // }).appendTo( "body" );
+
+//   $.each( data, function( key, val ) {
+//     items.push( key + ", " + val);
+//   });
+
+// });
+ 
+//  console.log(items);
+
+
+// case 2
+////////////
+
+  var items2 = [];
+$.getJSON( "totalEclipse_lat_long.json", function( data2 ) {
+	console.log("data2 kommt hunter : ")
+	console.log(data2);
+
+
+for (var x in data2) {
+    items2.push(data2[x]);
+}
+
+});
+ 
+  var items2 = [];
+
+ console.log('items2 kommt hereunter : ');
+ console.log(items2);
+
+ console.log('item2 first element is : ' + ' it should give a list ');
+ console.log(items2[0][0].CITY)
+
+ //testing out ajax to array and accessing it
+
+ // console.log("Is items2 an array : " + Array.isArray(items2));
+
+// console.log("stringified hereunter : ");
+// console.log(JSON.stringify(items2, null, 2));
+
+
+
+// var items2Array =[];
+
+// for (var aaa in items2) {
+//     items2.push(items2Array[aaa]);
+// }
+// console.log('items2Array kommt hereunter : ')
+// console.log(items2Array)
+
+
+
+// console.log ("testa mig igen ");
+
+
+// var tlisting_arr = [];
+// for (var prop in tlisting) {
+//     tlisting_arr.push(tlisting[prop]);
+// }
+// console.log('tlisting kommt unter : ')
+// console.log(tlisting)
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

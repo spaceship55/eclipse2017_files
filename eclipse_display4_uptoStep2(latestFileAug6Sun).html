@@ -11,7 +11,7 @@
 
 body{
 	/*background-color: black;*/
-	background-image: url("eclipse_bg_empty.jpg");
+	background-image: url("eclipse_bg_darker.png");
 	background-repeat:no-repeat;
 	/*background-size:contain;*/
 	background-position:center;
@@ -29,11 +29,11 @@ h1, h3 {
 
 .eclipseyear {
 font-size: 60px;
-margin-bottom: 10px;
+margin-bottom: 0px;
 }
 
 .eclipseTitle{
-	margin-top: 10px;
+	margin-top: 0px;
 }
 
 .contentArea{
@@ -277,11 +277,12 @@ var a1 = $.ajax({
 
 
 			    		localEclipseTime = locData.local_data[0].time;
-			    		$('.localtimeNum').html(localEclipseTime);
-			    			//trimming local time to calculate countdown
+			    		
+		    			//trimming local time to calculate countdown
 			    		// var string = "this is a string";
 						var length = 5;
 						trimmedlocalEclipseTime = localEclipseTime.substring(0, length);
+						$('.localtimeNum').html(trimmedlocalEclipseTime);
 
 			    		localLat = locData.lat;
 			    		localLon = locData.lon;
