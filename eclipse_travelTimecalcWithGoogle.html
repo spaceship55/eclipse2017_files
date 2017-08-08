@@ -23,25 +23,40 @@
         padding: 0;
     }
 </style>
-<div id="map" style="position: relative; overflow: hidden;">
+<!-- <div id="map" style="position: relative; overflow: hidden;">
     <div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
-</div>
+</div> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-APIKEY = "AIzaSyC1CCvx0HI78PGLWpO-R67s8r7A0zckEyc";
-requestURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PUcallback=?";
+// APIKEY = "AIzaSyC1CCvx0HI78PGLWpO-R67s8r7A0zckEyc";
+// requestURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PUcallback=?";
 
-$.ajax({
-            url: requestURL, 
-            type: "GET",   
-            dataType: 'jsonp',
-            cache: false,
-            success: function(response){                          
-                alert(response);                   
-            }           
-        }); 
+// $.ajax({
+//             url: requestURL, 
+//             type: "GET",   
+//             dataType: 'jsonp',
+//             cache: false,
+//             success: function(response){                          
+//                 alert(response);                   
+//             }           
+//         }); 
 </script>
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU&callback=initMap"></script>
+
+<script>
+console.log('er funktionert')
+ $.ajax({
+          dataType: 'json',
+          // url: 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + city_stateName + '&destinations=' + closestCity.name + '&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU'
+            url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC|Seattle&destinations=San+Francisco|Victoria+BC&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU'
+             
+            }).done(function(ShowTravelTimeData) {
+
+              totalTravelTime = rows[0].elements.duration.text;
+              console.log(totalTravelTime);
+
+            });
+</script>
 
 
 
