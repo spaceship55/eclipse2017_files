@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<div id="groups11"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+
+$(document).ready(function () {
+
+//// Items from external file /////
+$.ajax({
+    type: 'GET',
+    url: 'totalEclipse_lat_long.json?1',
+    dataType: 'json',
+    success: function(data) { 
+      console.log('json data successfully collected.\n')
+      console.log(data);
+      successCallBack(data);
+      }
+});
+
+
+function successCallBack(tlisting_arr){
+  console.log("tlisting_arr below : ")
+  console.log(tlisting_arr.locations[0]);
+
+ var gLat;
+ var closestCity = new Object();
+ closestCity.distance = 999999999;
+ var distance;
+//Getting user's lat/lon from google
+	var gettingList = $.ajax({
+	    dataType: 'json',
+	    url: "http://maps.googleapis.com/maps/api/geocode/json?address="  + '10001', // zip code will be replaced by user input later
+	    type:"POST"
+	    }).done(function(info) {
+	            console.log("info array goes below : ")
+	            console.log(info);
+	            gLat = info.results[0].geometry.location.lat;
+	            console.log('inside getting List : ' + gLat);
+	            console.log('inside getting list  : ' + info.results[0].geometry.location.lat );//works!
+	            
+	            var myList11 =[];
+	
+				//Going over the list of cities and their lat/longitude then add distance from user's zip code. 
+				var i, j, a11, b11;
+				
+				console.log('tlisting: ');
+				console.log(tlisting_arr.locations[0]);
+				console.log('flag5');
+				for (i = 0; i < tlisting_arr.locations.length; i++) {
+				    //for (j = 0; j < tlisting_arr[i].length; j++) {
+				      originLon11 = -96.698886,
+				      originLat11 = 33.019843;
+				
+				      destLon11 = tlisting_arr.locations[i].longitude;
+				      destLat11 = tlisting_arr.locations[i].latitude;
+				      
+				      console.log('destLon11 = ' + destLon11);
+				      console.log('destLat11 = ' + destLat11);
+				
+					
+				      distance = hesapla(originLon11, originLat11, destLon11, destLat11);
+				      if(distance < closestCity.distance)
+				      {
+				      	closestCity.distance = distance;
+				      	closestCity.name = tlisting_arr.locations[i].name;
+				      }
+				
+				      console.log('distace is : ' + distance);
+				      
+				      
+				      /*myList11.push("'"  + tlisting_arr.locations[i].name + "'"  + ", " +  tlisting_arr.locations[i].distance);
+				   // }
+				
+				      var sortedList =   myList11.sort(function(a,b){
+				        return a[1] - b[1];
+				        });
+				
+				      console.log('SortedList ar : ' +  sortedList);
+				
+				
+				      var sliceNameOut = sortedList[0].match("'(.*)'"); 
+				      var closestCity =sliceNameOut[1];
+				      
+				      console.log('Slicing test here2 : ' + sliceNameOut[1]);
+				      */
+				      
+				      
+
+					
+				
+				
+				
+				
+				//end of for loop//
+				}
+				
+				// $("#groups11").append('<li><h2>Closest city is ' + closestCity.name + ' at ' + closestCity.distance.toFixed(2) + ' miles.</h2></li>');
+				$("#groups11").append('<li><h2>Closest city is ' + closestCity.name + ' at ' + closestCity.distance.toFixed(2) + ' miles.</h2></li>');
+	    
+	    //end of gettingList              
+	    });
+
+	
+	console.log(gettingList);
+	console.log('outside getting list is : ' +  gLat);
+
+  console.log("tlisting_arr's length is : " + tlisting_arr.locations.length)
+
+
+
+//end of function successCallBack//
+}
+
+
+
+
+
+//hesapla code to calculate the distance b/w 2 points //
+//https://stackoverflow.com/questions/15671999/json-longitude-latitude-nearest-location
+// http://jsfiddle.net/MLETD/
+
+    function hesapla(meineLongitude, meineLatitude, long1, lat1) {
+        erdRadius = 6371;
+
+        meineLongitude = meineLongitude * (Math.PI / 180);
+        meineLatitude = meineLatitude * (Math.PI / 180);
+        long1 = long1 * (Math.PI / 180);
+        lat1 = lat1 * (Math.PI / 180);
+
+        x0 = meineLongitude * erdRadius * Math.cos(meineLatitude);
+        y0 = meineLatitude * erdRadius;
+
+        x1 = long1 * erdRadius * Math.cos(lat1);
+        y1 = lat1 * erdRadius;
+
+        dx = x0 - x1;
+        dy = y0 - y1;
+
+        d = Math.sqrt((dx * dx) + (dy * dy));
+        return d;
+    }
+    function schoneStrecke(d){
+        if (d < 1) {
+            return Math.round(d * 1000) +" m";
+        } else {
+            return Math.round(d * 10) / 10 +" km";
+        }
+    };
+
+
+
+
+
+//end of document ready
+});
+
+</script>
+
+</body>
+</html>

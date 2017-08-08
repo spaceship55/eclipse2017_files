@@ -67,3 +67,7 @@ https://stackoverflow.com/questions/15671999/json-longitude-latitude-nearest-loc
 http://jsfiddle.net/MLETD/
 
 
+
+
+Link to fetch driving time from zip code:
+https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=07650&destinations=10013&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<div id="travel_data">
+  
+</div>
+
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<div id="map" style="position: relative; overflow: hidden;">
+    <div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+APIKEY = "AIzaSyC1CCvx0HI78PGLWpO-R67s8r7A0zckEyc";
+requestURL = "https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PUcallback=?";
+
+$.ajax({
+            url: requestURL, 
+            type: "GET",   
+            dataType: 'jsonp',
+            cache: false,
+            success: function(response){                          
+                alert(response);                   
+            }           
+        }); 
+</script>
+<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU&callback=initMap"></script>
+
+
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU"></script>
+
+
+<script>
+
+$(function() {
+
+  // calcTravelTime = findClosestCity.then(function(ShowTravelTime){
+
+
+
+console.log('trying here');
+
+  // $.ajax({
+  //     type: 'GET',
+  //     // url: 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU',
+  //     url: 'https://maps.googleapis.com/maps/api/distancematrix/json?&origins=07650&destinations=10013&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU',
+  //     dataType: 'jsonp',
+  //     success: function(traveldata) { 
+  //       // console.log('json data successfully collected.\n')
+  //       console.log('traveldata is : ' traveldata);
+
+  //             // totalTravelTime = traveldata.rows.elements.duration.text;
+  //             // console.log( 'total travel time is : ' +  totalTravelTime);
+        
+  //         }
+  //   });
+
+
+
+
+      // $.ajax({  
+      //     type: 'GET',
+      //     dataType: 'json',
+      //     url:'https://maps.googleapis.com/maps/api/distancematrix/json?&origins=07650&destinations=10013&key=AIzaSyAyB9PUekBJN1AmX8vrhG1ieRifxVhE2PU'
+      //       })
+
+      // .done(function(ttt) {
+
+      // console.log(ttt);
+
+      //     });
+
+
+});
+
+
+// $(document).ready(function(){
+//     $.ajax({
+//         url: "https://api.instagram.com/v1/media/search?access_token=MYTOKEN&lat=00.0&lng=00.0&distance=30000",
+//         // The name of the callback parameter
+//         jsonp: "callback",
+//         // Tell jQuery we're expecting JSONP
+//         dataType: "jsonp",
+//         // Deal with the response
+//         success: function(instagramres){
+//             alert(instagramres);
+//         }
+//     });
+// });
+
+
+
+</script> -->
+</body>
+</html>
